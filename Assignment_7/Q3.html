@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <script>
+        function calculate() {
+            const num1 = parseFloat(prompt("Enter the first number:"));
+            const num2 = parseFloat(prompt("Enter the second number:"));
+
+            if (isNaN(num1) || isNaN(num2)) {
+                alert("Please enter valid numbers.");
+                return;
+            }
+
+            const operation = prompt("Choose the operation: 'add', 'subtract', 'multiply', or 'divide'").toLowerCase();
+
+            let result;
+            switch (operation) {
+                case 'add':
+                    result = num1 + num2;
+                    break;
+                case 'subtract':
+                    result = num1 - num2;
+                    break;
+                case 'multiply':
+                    result = num1 * num2;
+                    break;
+                case 'divide':
+
+                    if (num2 === 0) {
+                        alert("Error: Division by zero is not allowed.");
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+                default:
+                    alert("Invalid operation. Please choose 'add', 'subtract', 'multiply', or 'divide'.");
+                    return;
+            }
+            alert(`The result is: ${result}`);
+        }
+
+        window.onload = function() {
+            calculate();
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>
