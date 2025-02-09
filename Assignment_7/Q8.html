@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sort Array Without sort()</title>
+  </head>
+  <body>
+    <h1>Sort an Array Without Using sort()</h1>
+    <p>Enter an array of numbers separated by commas:</p>
+    <input type="text" id="arrayInput" placeholder="e.g., 5,3,8,1,2" />
+    <button onclick="sortArray('asc')">Sort Ascending</button>
+    <button onclick="sortArray('desc')">Sort Descending</button>
+
+    <h3>Results:</h3>
+    <p id="sortedOutput"></p>
+
+    <script>
+      function sortArray(order) {
+        const userInput = document.getElementById("arrayInput").value;
+        const array = userInput.split(",").map(Number);
+
+        for (let i = 0; i < array.length - 1; i++) {
+          for (let j = 0; j < array.length - i - 1; j++) {
+            if (
+              (order === "asc" && array[j] > array[j + 1]) ||
+              (order === "desc" && array[j] < array[j + 1])
+            ) {
+              [array[j], array[j + 1]] = [array[j + 1], array[j]];
+            }
+          }
+        }
+
+        document.getElementById(
+          "sortedOutput"
+        ).textContent = `Sorted Array (${order.toUpperCase()}): ${array.join(
+          ", "
+        )}`;
+      }
+    </script>
+  </body>
+</html>

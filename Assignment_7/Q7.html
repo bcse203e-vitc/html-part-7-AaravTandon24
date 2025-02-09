@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find the Second Largest Number</title>
+  </head>
+  <body>
+    <h1>Find the Second Largest Number</h1>
+    <p>Enter an array of numbers separated by commas:</p>
+    <input type="text" id="arrayInput" placeholder="e.g., 1,2,3,4,5" />
+    <button onclick="findSecondLargest()">Submit</button>
+
+    <h3>Results:</h3>
+    <p id="secondLargestOutput"></p>
+    <p id="thirdLargestOutput"></p>
+
+    <script>
+      function findSecondLargest() {
+        const userInput = document.getElementById("arrayInput").value;
+        const array = userInput.split(",").map(Number);
+
+        let largest = -Infinity;
+        let secondLargest = -Infinity;
+        let thirdLargest = -Infinity;
+
+        // Find the largest, second largest, and third largest numbers
+        for (let num of array) {
+          if (num > largest) {
+            thirdLargest = secondLargest;
+            secondLargest = largest;
+            largest = num;
+          } else if (num > secondLargest && num < largest) {
+            thirdLargest = secondLargest;
+            secondLargest = num;
+          } else if (num > thirdLargest && num < secondLargest) {
+            thirdLargest = num;
+          }
+        }
+
+        // Display second largest number
+        const secondLargestOutput =
+          secondLargest !== -Infinity ? secondLargest : "Not applicable";
+        document.getElementById(
+          "secondLargestOutput"
+        ).textContent = `Second Largest Number: ${secondLargestOutput}`;
+
+        // Display third largest number
+        const thirdLargestOutput =
+          thirdLargest !== -Infinity ? thirdLargest : "Not applicable";
+        document.getElementById(
+          "thirdLargestOutput"
+        ).textContent = `Third Largest Number: ${thirdLargestOutput}`;
+      }
+    </script>
+  </body>
+</html>
