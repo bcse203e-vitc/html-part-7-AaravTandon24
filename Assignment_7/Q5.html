@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Character and Word Counter</title>
+    <script>
+      function analyzeText() {
+        const input = document.getElementById("inputText").value;
+
+        const characterCount = input.length;
+
+        const words = input.trim().split(/\s+/);
+        const wordCount = words[0] === "" ? 0 : words.length;
+
+        const wordFrequency = {};
+        let highlightedText = input;
+
+        words.forEach((word) => {
+          const lowerWord = word.toLowerCase();
+          wordFrequency[lowerWord] = (wordFrequency[lowerWord] || 0) + 1;
+        });
+
+        Object.keys(wordFrequency).forEach((word) => {
+          if (wordFrequency[word] > 1) {
+            const regex = new RegExp(`\\b${word}\\b`, "gi");
+            highlightedText = highlightedText.replace(
+              regex,
+              `<mark>${word}</mark>`
+            );
+          }
+        });
+
+        document.getElementById(
+          "characterCount"
+        ).innerText = `Characters: ${characterCount}`;
+        document.getElementById("wordCount").innerText = `Words: ${wordCount}`;
+        document.getElementById(
+          "highlightedText"
+        ).innerHTML = `Highlighted Repeated Words: ${highlightedText}`;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Character and Word Counter</h1>
+    <textarea
+      id="inputText"
+      rows="5"
+      cols="40"
+      placeholder="Type your text here..."
+    ></textarea>
+    <br />
+    <button onclick="analyzeText()">Analyze</button>
+    <p id="characterCount"></p>
+    <p id="wordCount"></p>
+    <p id="highlightedText"></p>
+  </body>
+</html>
